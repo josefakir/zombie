@@ -125,12 +125,12 @@ hr{ clear: both; border: 0; border-top: 1px solid #eeeeee; width: 100%;}
 /*--------------------------------------------*/
 /*-------- theme1 lading screen Intro -------*/
 /*--------------------------------------------*/
-.landingpage{ background: #5c6693}
+.landingpage{ background: url(../img/banner1.png);     background-size: cover;}
 .buttonbar{ position: fixed; bottom: 0; width: 100%; left: 0; z-index: 1}
 .buttonbar .button{left: 0; line-height: 60px; padding: 0; vertical-align: middle; text-align: center; height: 60px; border-radius: 0}
 .logo { margin: 0 auto; width: 80%; max-width: 400px; display: block; }
 .logo img{ max-width: 100%;}
-.color2{ background: #d667cd ; color:#ffffff !important;}
+.color2{ background: #ff5655 ; color:#ffffff !important;}
 .introtext{ color: #ffffff; text-align: center}
 .introtext h1{margin: 0;color: #fff;}
 .introtext p{margin: 0; font-size: 14px; }
@@ -139,7 +139,7 @@ hr{ clear: both; border: 0; border-top: 1px solid #eeeeee; width: 100%;}
 /*--------------------------------------------*/
 /*-------- theme1 login screen -------*/
 /*--------------------------------------------*/
-.loginsimag{ margin: 0; padding: 0; background: #5c6693; text-align: center}
+.loginsimag{ margin: 0; padding: 0; background: url(../img/banner1.png); text-align: center}
 .loginsimag img{ max-width: 200px; margin: 0 auto}
 .focus-state .input-field:after, .focus-state .item-input-field:after, .input-field.focus-state:after, .input-field.not-empty-state:after, .item-input-field.focus-state:after, .item-input-field.not-empty-state:after, .not-empty-state .input-field:after, .not-empty-state .item-input-field:after { background: #2196f3;-webkit-transform: scaleY(1)!important; -moz-transform: scaleY(1)!important;-ms-transform: scaleY(1)!important; transform: scaleY(1)!important;}
 .button-connect .button.facebook{ background: #0e449a;}
@@ -152,7 +152,7 @@ hr{ clear: both; border: 0; border-top: 1px solid #eeeeee; width: 100%;}
 /*-------- theme1 home screen -------*/
 /*--------------------------------------------*/
 .largebanner {height: 100%;}
-.largebanner img{opacity: 0.2; min-height: 100%}
+.largebanner img{opacity: 0.5; width: 100%}
 .largebanner .textblock{position: absolute;z-index: 1;color: #ffffff;text-align: center;width: 100%;display: block;top: 30%;padding: 10px;box-sizing: border-box;}
 .largebanner .swiper-slide {background: #5c6693;}
 .largebanner .textblock h2, .largebanner .textblock h3, .largebanner .textblock h4, .largebanner .textblock h5{margin: 0;clear: both;width: 100%;display: block;line-height: 40px;vertical-align: middle;color: #fff;}
@@ -398,3 +398,5 @@ h2+p { font-size: 17px;  font-weight: 400;}
 ::-webkit-scrollbar-thumb:window-inactive {
  background: rgba(0, 0, 0, 0.2);
 }
+
+.fa.fa-trophy{color: #edd525}

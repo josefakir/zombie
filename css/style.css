@@ -1,0 +1,12 @@
+.swipeout-update{background: #FFBF00 !important}
+.borrar{background: red !important}
+.lista{padding: 10px !important;}
+.no_cumplir_tarea {
+    color: red !important;
+    font-size: 34px;
+}
+.cumplir_tarea {
+    color: #97ce68 !important;
+    font-size: 34px;
+    margin-left: 10px; margin-right: 10px
+}

@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="theme-color" content="#2196f3">
-  <title>Max Smart</title>
+  <title>¿Soy Zombie?</title>
   <!-- Font embedding link goes here -->
   <link href="http://fonts.googleapis.com/css?family=Roboto:400,300,500,700" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
@@ -18,13 +18,14 @@
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/swipebox.min.css">
   <link rel="stylesheet" href="css/maxframes.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="theme-lightblue">
   <div class="statusbar-overlay"></div>
   <div class="panel-overlay"></div>
   <div class="panel panel-left panel-cover sidebar">
     <div class="buttonbar row no-gutter">
-      <a href="sign-in.html" class=" button color2 col-100">Cerrar Sesión</a>
+      <a href="#" class=" button color2 col-100 close-panel" id="btn_cerrar_sesion">Cerrar Sesión</a>
     </div>
     <div class="view">
       <div class=" ">
@@ -47,21 +48,21 @@
                 <div class="accordion-item-content">
                   <div class="content-block">
                     <ul>
-                      <li><a href="#" data-panel="left" class="item-link  close-panel"><span>Espirituales</span></a></li>
-                      <li><a href="#" data-panel="left" class="item-link  close-panel"><span>Físicas</span></a></li>
-                      <li><a href="#" data-panel="left" class="item-link  close-panel"><span>Círculo Cercano</span></a></li>
-                      <li><a href="#" data-panel="left" class="item-link  close-panel"><span>Laboral</span></a></li>
-                      <li><a href="#" data-panel="left" class="item-link  close-panel"><span>Responsabilidad Social</span></a></li>
+                      <li><a href="metas.html?ambito=espirituales" data-panel="left" class="item-link  close-panel cambiarambito" rel="espirituales"><span>Espirituales</span></a></li>
+                      <li><a href="metas.html?ambito=fisicas" data-panel="left" class="item-link  close-panel cambiarambito" rel="fisicas"><span>Físicas</span></a></li>
+                      <li><a href="metas.html?ambito=circulo" data-panel="left" class="item-link  close-panel cambiarambito" rel="circulo"><span>Círculo Cercano</span></a></li>
+                      <li><a href="metas.html?ambito=laboral" data-panel="left" class="item-link  close-panel cambiarambito" rel="laboral"><span>Laboral</span></a></li>
+                      <li><a href="metas.html?ambito=responsabilidad" data-panel="left" class="item-link  close-panel cambiarambito" rel="responsabilidad"><span>Responsabilidad Social</span></a></li>
                     </ul>
                   </div>
                 </div>
               </li>
-              <li class="accordion-item"><a href="#" class="item-content item-link">
+              <li><a href="cumpli-metas.html" class="item-content item-link close-panel">
                 <div class="item-inner">
                   <div class="item-title"><i class="fa fa-tasks"></i>¿Cumplí mis tareas diarias?</div>
                 </div></a>
               </li>
-              <li class="accordion-item"><a href="#" class="item-content item-link">
+              <li><a href="avances.html" class="item-content item-link  close-panel ">
                 <div class="item-inner">
                   <div class="item-title"><i class="fa fa-tasks"></i>Avances</div>
                 </div></a>
@@ -91,22 +92,20 @@
           <div class="item-media"><img src="img/pic1.png" width="44"  alt=""/></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">Max Smith</div>
+              <div class="item-title">Pepe Becerra</div>
             </div>
-            <div class="item-subtitle">India</div>
           </div>
         </div>
         <div class="page-content">
           <div class="inputs-list content-block" >
-            <h2 class="maintitle  center">Contact us</h2>
-            <p class="center" >We will be back on your provided email address</p>
+            <h2 class="maintitle  center">Contáctanos</h2>
           </div>
           <div class="list-block">
             <ul>
               <li>
                 <div class="item-content">
                   <div class="item-inner">
-                    <div class="item-title label">Your name</div>
+                    <div class="item-title label">Nombre</div>
                     <div class="item-input">
                       <input type="text" placeholder=""/>
                     </div>
@@ -126,17 +125,29 @@
               <li>
                 <div class="item-content">
                   <div class="item-inner">
-                    <div class="item-title label">Phone</div>
+                    <div class="item-title label">Tema</div>
+                    <div class="item-input">
+                      <input type="tel" placeholder="Conferencias motivacionales"/>
+                    </div>
+                  </div>
+                </div>
+              </li>
+             <li>
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title label">Teléfono</div>
                     <div class="item-input">
                       <input type="tel" placeholder=""/>
                     </div>
                   </div>
                 </div>
               </li>
+             
+              </li>
               <li class="align-top">
                 <div class="item-content">
                   <div class="item-inner">
-                    <div class="item-title label">Message/Queries</div>
+                    <div class="item-title label">Mensaje</div>
                     <div class="item-input">
                       <textarea class="resizable"></textarea>
                     </div>
@@ -145,28 +156,10 @@
               </li>
             </ul>
           </div>
-          <div class="content-block"> <a href="home.html" class="button button-fill ">Get in touch</a> </div>
+          <div class="content-block"> <a href="home.html" class="button button-fill ">Enviar</a> </div>
           <hr>
-          <div class="center content-block ">
-            <div class=""><img src="img/phone.png" alt=""></div>
-            <h2 class=""> 000 000 000 </h2>
-            <p class=""> Call Us </p>
-          </div>
-          <hr>
-          <div class="content-block">
-            <h2 class="center">We are at social</h2>
-            <p class="center">Get connected with us on social</p>
-            <ul class="socials">
-              <li><a href="" class="fb"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="" class="tw"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="" class="gp"><i class="fa fa-google-plus"></i></a></li>
-              <li><a href="" class="pin"><i class="fa fa-pinterest"></i></a></li>
-            </ul>
-          </div>
-
         </div>
         <div class="buttonbar row no-gutter">
-          <a href="contactus.html" class=" button button-fill col-100 close-panel">Locate Us</a>
         </div>
       </div>
     </div>
@@ -206,5 +199,6 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="js/masonry.pkgd.min.js"></script>
 <script type="text/javascript" src="js/maxframes.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
