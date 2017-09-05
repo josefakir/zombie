@@ -420,4 +420,47 @@ myApp.onPageInit('cumplimetas', function (page) {
 	})
 });   
 
+myApp.onPageInit('avances', function (page) {
+	id_usuario = localStorage.getItem('userid');
+	$.ajax({
+		url : urlWS+'/avances/'+id_usuario,
+		type: 'GET',
+		headers: {
+			"token": localStorage.getItem("apikey")
+		},
+		beforeSend : function(){
+			myApp.showIndicator();
+		},
+		success : function(data){
+			var cont = 0;
+			var output = '';
+			// <div id="gauge" class="200x160px"></div>
+			$.each( data, function( key, value ) {
+				output += '<div class="card col-100 tablet-50"><div class="card-content"> <div id="gauge'+cont+'" class="200x160px"></div></div></div>';
+				cont++;
+			});
+			$('#contenedoravances').html(output);
+			for (i = 0; i < cont; i++) { 
+				valor = data[i].porcentaje;
+				meta = data[i].meta; 
+				valor = valor.replace('%','');
+				var g = new JustGage({
+					id: "gauge"+i,
+					value: Math.ceil(valor),
+					min: 0,
+					max: 100,
+					title: meta
+				});
+			}
+		},
+		complete : function(data){
+			myApp.hideIndicator();
+		}
+	})
+
+
+
+	
+});   
+
 
