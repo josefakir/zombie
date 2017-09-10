@@ -1,4 +1,5 @@
-var urlWS = "http://localhost/zombieapi";
+//var urlWS = "http://localhost/zombieapi";
+var urlWS = "http://graphicsandcode.com/proyectos/zombieapi";
 
 $(document).ready(function(){
 	/* CAMBIAR AMBITO */
@@ -27,6 +28,14 @@ $(document).ready(function(){
 				localStorage.setItem('auth', true);
 				localStorage.setItem('apikey', data[0].apikey);
 				localStorage.setItem('userid', data[0].user_id);
+				localStorage.setItem('avatar', data[0].avatar);
+				localStorage.setItem('nombre', data[0].nombre);
+				localStorage.setItem('paterno', data[0].paterno);
+				localStorage.setItem('correo', data[0].correo);
+				$('#contacto_nombre').val(localStorage.getItem('nombre')+" "+localStorage.getItem('paterno'));
+				$('#contacto_email').val(localStorage.getItem('correo'));
+				$('.avatar').attr('src',urlWS+'/'+localStorage.getItem('avatar'));
+				$('.nombreusuario').html(localStorage.getItem('nombre')+' '+localStorage.getItem('paterno'));
 				mainView.loadPage('home.html');
 			},
 			complete : function(data){
@@ -228,6 +237,164 @@ $(document).ready(function(){
 		})
 	});
 
+	/* SALUD FINANCIERA */
+	$(document).on('click', '#btn_calcular_salud', function(e){
+		var fijos = 0;
+		$('.fijos').each(function(){
+			valor = $(this).val();
+			if(valor==''){
+				valor = 0;
+			}
+		    fijos += parseFloat(valor);
+		});
+		var variables = 0;
+		$('.variables').each(function(){
+			valor = $(this).val();
+			if(valor==''){
+				valor = 0;
+			}
+		    variables += parseFloat(valor);
+		});
+		var egresos = 0;
+		$('.egresos').each(function(){
+			valor = $(this).val();
+			if(valor==''){
+				valor = 0;
+			}
+		    egresos += parseFloat(valor);
+		});
+
+		$('#fijos').html(fijos);
+		$('#variables').html(variables);
+		$('#egresos').html(egresos);
+		$('#ahorro').html((fijos+variables)-egresos);
+
+		localStorage.setItem("fijos-enero",$( "#fijos-enero").val());
+		localStorage.setItem("fijos-febrero",$( "#fijos-febrero").val());
+		localStorage.setItem("fijos-marzo",$( "#fijos-marzo").val());
+		localStorage.setItem("fijos-abril",$( "#fijos-abril").val());
+		localStorage.setItem("fijos-mayo",$( "#fijos-mayo").val());
+		localStorage.setItem("fijos-junio",$( "#fijos-junio").val());
+		localStorage.setItem("fijos-julio",$( "#fijos-julio").val());
+		localStorage.setItem("fijos-agosto",$( "#fijos-agosto").val());
+		localStorage.setItem("fijos-septiembre",$( "#fijos-septiembre").val());
+		localStorage.setItem("fijos-octubre",$( "#fijos-octubre").val());
+		localStorage.setItem("fijos-noviembre",$( "#fijos-noviembre").val());
+		localStorage.setItem("fijos-diciembre",$( "#fijos-diciembre").val());
+
+		localStorage.setItem("variables-enero",$( "#variables-enero").val());
+		localStorage.setItem("variables-febrero",$( "#variables-febrero").val());
+		localStorage.setItem("variables-marzo",$( "#variables-marzo").val());
+		localStorage.setItem("variables-abril",$( "#variables-abril").val());
+		localStorage.setItem("variables-mayo",$( "#variables-mayo").val());
+		localStorage.setItem("variables-junio",$( "#variables-junio").val());
+		localStorage.setItem("variables-julio",$( "#variables-julio").val());
+		localStorage.setItem("variables-agosto",$( "#variables-agosto").val());
+		localStorage.setItem("variables-septiembre",$( "#variables-septiembre").val());
+		localStorage.setItem("variables-octubre",$( "#variables-octubre").val());
+		localStorage.setItem("variables-noviembre",$( "#variables-noviembre").val());
+		localStorage.setItem("variables-diciembre",$( "#variables-diciembre").val());
+
+		localStorage.setItem("egresos-enero",$( "#egresos-enero").val());
+		localStorage.setItem("egresos-febrero",$( "#egresos-febrero").val());
+		localStorage.setItem("egresos-marzo",$( "#egresos-marzo").val());
+		localStorage.setItem("egresos-abril",$( "#egresos-abril").val());
+		localStorage.setItem("egresos-mayo",$( "#egresos-mayo").val());
+		localStorage.setItem("egresos-junio",$( "#egresos-junio").val());
+		localStorage.setItem("egresos-julio",$( "#egresos-julio").val());
+		localStorage.setItem("egresos-agosto",$( "#egresos-agosto").val());
+		localStorage.setItem("egresos-septiembre",$( "#egresos-septiembre").val());
+		localStorage.setItem("egresos-octubre",$( "#egresos-octubre").val());
+		localStorage.setItem("egresos-noviembre",$( "#egresos-noviembre").val());
+		localStorage.setItem("egresos-diciembre",$( "#egresos-diciembre").val());
+	});
+
+	$(document).on('click', '.confirm-title-ok-cancel', function(e){
+		myApp.confirm('¿Está seguro de querer eliminar todas las alarmas?', 'Si hace click en ok se eliminarán', 
+	      function () {
+	      	$.ajax({
+	      		type: 'DELETE',
+				url : urlWS+'/alarmas/'+localStorage.getItem('userid'),
+				headers: {
+					"token": localStorage.getItem("apikey")
+				},
+				beforeSend : function(){
+					myApp.showIndicator();
+				},
+				success : function(data){
+					refrescarAlarmas();
+				},
+				complete : function(data){
+					myApp.hideIndicator();
+				}
+			});
+	      },
+	      function () {
+	        return false;
+	      }
+	    );
+	});
+	$(document).on('click', '#btn_agregar_alarma', function(e){
+		var postData = {
+			id_usuario : localStorage.getItem('userid'),
+			texto: $('#input_texto').val(),
+			repetir : $('#input_repetir').val(),
+			fecha : $('#calendar-default').val()+' '+$('#hora_alarma').val()
+		}
+		$.ajax({
+			method : 'POST',
+			url : urlWS+'/alarma',
+			headers: {
+				"token": localStorage.getItem("apikey")
+			},
+			data : postData,
+			beforeSend : function(){
+				myApp.showIndicator();
+			},
+			success : function(data){
+				//REFRESCAR METAS
+				mainView.loadPage('recordatorios.html');
+			},
+			complete : function(data){
+				myApp.hideIndicator();
+			},
+		});
+	});
+	$(document).on('click', '.borraralarma', function(e){
+		id_alarma = $(this).attr('rel');
+		myApp.confirm('¿Está seguro de querer eliminar?','', function () {
+			eliminarAlarma(id_alarma);
+	    });
+	});
+	$(document).on('click', '#btn_enviar_mensaje', function(e){
+		var postData = {
+			contacto_nombre : $('#contacto_nombre').val(),
+			contacto_email : $('#contacto_email').val(),
+			contacto_tema : $('#contacto_tema').val(),
+			contacto_telefono : $('#contacto_telefono').val(),
+			contacto_mensaje : $('#contacto_mensaje').val()
+		}
+		$.ajax({
+			method : 'POST',
+			url : urlWS+'/contacto',
+			headers: {
+				"token": localStorage.getItem("apikey")
+			},
+			data : postData,
+			beforeSend : function(){
+				myApp.showIndicator();
+			},
+			success : function(data){
+				console.log(data);
+				myApp.alert('El mensaje fue enviado correctamente', '<i class="fa fa-exclamation-circle" aria-hidden="true" style="color:green"></i> Éxito');                 
+
+			},
+			complete : function(data){
+				myApp.hideIndicator();
+			},
+		});
+	});
+
 });
 
 function refrescarMetas(ambito){
@@ -246,6 +413,29 @@ function refrescarMetas(ambito){
 				output += '<li class="swipeout primarystatus"><div class="item-content swipeout-content"><a class="item-content item-link" href="tareas.html?id_meta='+value.id+'"><div class="item-media"><i class="fa fa-trophy" aria-hidden="true"></i></div><div class="item-inner"><div class="item-title-row"><div class="item-title">'+value.texto+'</div></div></div></a></div><div class="swipeout-actions-right"><a href="#" class="borrar borrameta" rel="'+value.id+'" >Eliminar</a><a href="editar-meta.html?id_meta='+value.id+'" class="swipeout-update editarmeta"  rel="'+value.id+'">Editar</a></div></li>';
 			})
 			$('#list_metas').html(output);
+		},
+		complete : function(data){
+			myApp.hideIndicator();
+		}
+	})
+}
+
+function refrescarAlarmas(){
+	$.ajax({
+		url : urlWS+'/alarmas/'+localStorage.getItem('userid'),
+		headers: {
+			"token": localStorage.getItem("apikey")
+		},
+		beforeSend : function(){
+			myApp.showIndicator();
+		},
+		success : function(data){
+			$('#list_recordatorios').html('');
+			var output = '';
+			$.each( data, function( key, value ) {
+				output += '<li class="swipeout primarystatus"><div class="item-content swipeout-content"><!--<a class="item-content item-link" href="tareas.html?id_meta='+value.id+'">--><div class="item-media"><i class="fa fa-clock-o" aria-hidden="true"></i></div><div class="item-inner"><div class="item-title-row"><div class="item-title">'+value.texto+'</div></div></div><!--</a>--></div><div class="swipeout-actions-right"><a href="#" class="borrar borraralarma" rel="'+value.id+'" >Eliminar</a><!--<a href="editar-meta.html?id_meta='+value.id+'" class="swipeout-update editarmeta"  rel="'+value.id+'">Editar</a>--></div></li>';
+			})
+			$('#list_recordatorios').html(output);
 		},
 		complete : function(data){
 			myApp.hideIndicator();
@@ -284,6 +474,26 @@ function eliminarTarea(id,id_meta){
 		},
 		success : function(data){
 			mainView.reloadPage('tareas.html?id_meta='+id_meta);
+		},
+		complete : function(data){
+			myApp.hideIndicator();
+		}
+	})
+}
+
+
+function eliminarAlarma(id){
+	$.ajax({
+		url : urlWS+'/alarma/'+id,
+		type: 'DELETE',
+		headers: {
+			"token": localStorage.getItem("apikey")
+		},
+		beforeSend : function(){
+			myApp.showIndicator();
+		},
+		success : function(data){
+			mainView.reloadPage('recordatorios.html');
 		},
 		complete : function(data){
 			myApp.hideIndicator();
@@ -457,10 +667,85 @@ myApp.onPageInit('avances', function (page) {
 			myApp.hideIndicator();
 		}
 	})
-
-
-
-	
 });   
 
+myApp.onPageInit('salud-financiera', function (page) {
+
+		$( "#fijos-enero").val(localStorage.getItem("fijos-enero"));
+		$( "#fijos-febrero").val(localStorage.getItem("fijos-febrero"));
+		$( "#fijos-marzo").val(localStorage.getItem("fijos-marzo"));
+		$( "#fijos-abril").val(localStorage.getItem("fijos-abril"));
+		$( "#fijos-mayo").val(localStorage.getItem("fijos-mayo"));
+		$( "#fijos-junio").val(localStorage.getItem("fijos-junio"));
+		$( "#fijos-julio").val(localStorage.getItem("fijos-julio"));
+		$( "#fijos-agosto").val(localStorage.getItem("fijos-agosto"));
+		$( "#fijos-septiembre").val(localStorage.getItem("fijos-septiembre"));
+		$( "#fijos-octubre").val(localStorage.getItem("fijos-octubre"));
+		$( "#fijos-noviembre").val(localStorage.getItem("fijos-noviembre"));
+		$( "#fijos-diciembre").val(localStorage.getItem("fijos-diciembre"));
+
+		$( "#variables-enero").val(localStorage.getItem("variables-enero"));
+		$( "#variables-febrero").val(localStorage.getItem("variables-febrero"));
+		$( "#variables-marzo").val(localStorage.getItem("variables-marzo"));
+		$( "#variables-abril").val(localStorage.getItem("variables-abril"));
+		$( "#variables-mayo").val(localStorage.getItem("variables-mayo"));
+		$( "#variables-junio").val(localStorage.getItem("variables-junio"));
+		$( "#variables-julio").val(localStorage.getItem("variables-julio"));
+		$( "#variables-agosto").val(localStorage.getItem("variables-agosto"));
+		$( "#variables-septiembre").val(localStorage.getItem("variables-septiembre"));
+		$( "#variables-octubre").val(localStorage.getItem("variables-octubre"));
+		$( "#variables-noviembre").val(localStorage.getItem("variables-noviembre"));
+		$( "#variables-diciembre").val(localStorage.getItem("variables-diciembre"));
+		
+		$( "#egresos-enero").val(localStorage.getItem("egresos-enero"));
+		$( "#egresos-febrero").val(localStorage.getItem("egresos-febrero"));
+		$( "#egresos-marzo").val(localStorage.getItem("egresos-marzo"));
+		$( "#egresos-abril").val(localStorage.getItem("egresos-abril"));
+		$( "#egresos-mayo").val(localStorage.getItem("egresos-mayo"));
+		$( "#egresos-junio").val(localStorage.getItem("egresos-junio"));
+		$( "#egresos-julio").val(localStorage.getItem("egresos-julio"));
+		$( "#egresos-agosto").val(localStorage.getItem("egresos-agosto"));
+		$( "#egresos-septiembre").val(localStorage.getItem("egresos-septiembre"));
+		$( "#egresos-octubre").val(localStorage.getItem("egresos-octubre"));
+		$( "#egresos-noviembre").val(localStorage.getItem("egresos-noviembre"));
+		$( "#egresos-diciembre").val(localStorage.getItem("egresos-diciembre"));
+});   
+
+myApp.onPageInit('recordatorios', function (page) {
+	refrescarAlarmas();
+});   
+myApp.onPageInit('alarmaadd', function (page) {
+	var calendarDefault = myApp.calendar({
+	    input: '#calendar-default',
+	}); 
+	$('#hora_alarma').timeDropper({
+		format : 'H:mm'
+	});
+});   
+
+myApp.onPageInit('home', function (page) {
+	$('.avatar').attr('src',urlWS+'/'+localStorage.getItem('avatar'));
+	$('.nombreusuario').html(localStorage.getItem('nombre')+' '+localStorage.getItem('paterno'));
+	$.ajax({
+		url : urlWS+'/mensajes',
+		type: 'GET',
+		beforeSend : function(){
+			myApp.showIndicator();
+		},
+		success : function(data){
+			$('#q1autor').html(data[0].autor);
+			$('#q2autor').html(data[1].autor);
+			$('#q3autor').html(data[2].autor);
+
+			$('#q1texto').html(data[0].texto);
+			$('#q2texto').html(data[1].texto);
+			$('#q3texto').html(data[2].texto);
+
+		},
+		complete : function(data){
+			myApp.hideIndicator();
+		}
+	})
+});   
+  
 

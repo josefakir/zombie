@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/swipebox.min.css">
   <link rel="stylesheet" href="css/maxframes.css">
+  <link rel="stylesheet" href="js/timedropper.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="theme-lightblue">
@@ -31,10 +32,10 @@
       <div class=" ">
         <div data-page="panel-left" class="sidemenu leftmenusmall gradient">
           <div class="item-content userprofile">
-            <div class="item-media"><img src="img/pic1.png" width="44" alt=""/></div>
+            <div class="item-media"><img class="avatar" src="img/pic1.png" width="44" alt=""/></div>
             <div class="item-inner">
               <div class="item-title-row">
-                <div class="item-title">Pepe Becerra</div>
+                <div class="item-title nombreusuario"></div>
               </div>
             </div>
           </div>
@@ -43,7 +44,7 @@
               <ul class="menu">
                <li class="accordion-item"><a href="#" class="item-content item-link">
                 <div class="item-inner">
-                  <div class="item-title"><i class="fa fa-tasks"></i>Metas (Largo plazo)</div>
+                  <div class="item-title"><i class="fa fa-trophy"></i>Metas (Largo plazo)</div>
                 </div></a>
                 <div class="accordion-item-content">
                   <div class="content-block">
@@ -59,22 +60,22 @@
               </li>
               <li><a href="cumpli-metas.html" class="item-content item-link close-panel">
                 <div class="item-inner">
-                  <div class="item-title"><i class="fa fa-tasks"></i>¿Cumplí mis tareas diarias?</div>
+                  <div class="item-title"><i class="fa fa-briefcase" style="color: #775014"></i>¿Cumplí mis tareas diarias?</div>
                 </div></a>
               </li>
               <li><a href="avances.html" class="item-content item-link  close-panel ">
                 <div class="item-inner">
-                  <div class="item-title"><i class="fa fa-tasks"></i>Avances</div>
+                  <div class="item-title"><i class="fa fa-spinner" style="color: #1d6cd6"></i>Avances</div>
                 </div></a>
               </li>
-              <li class="accordion-item"><a href="#" class="item-content item-link">
+              <li><a href="salud-financiera.html" class="item-content item-link  close-panel ">
                 <div class="item-inner">
-                  <div class="item-title"><i class="fa fa-tasks"></i>Salud Financiera</div>
+                  <div class="item-title"><i class="fa fa-money" style="color: green"></i>Salud Financiera</div>
                 </div></a>
               </li>
-              <li class="accordion-item"><a href="#" class="item-content item-link">
+              <li><a href="recordatorios.html" class="item-content item-link  close-panel ">
                 <div class="item-inner">
-                  <div class="item-title"><i class="fa fa-tasks"></i>Recordatorios</div>
+                  <div class="item-title"><i class="fa fa-clock-o"></i>Recordatorios</div>
                 </div></a>
               </li>
             </ul>
@@ -89,10 +90,10 @@
     <div class=" ">
       <div data-page="panel-left" class="sidemenu leftmenusmall gradient">
         <div class="item-content userprofile">
-          <div class="item-media"><img src="img/pic1.png" width="44"  alt=""/></div>
+          <div class="item-media"><img class="avatar" src="img/pic1.png" width="44"  alt=""/></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">Pepe Becerra</div>
+              <div class="item-title nombreusuario"></div>
             </div>
           </div>
         </div>
@@ -107,7 +108,7 @@
                   <div class="item-inner">
                     <div class="item-title label">Nombre</div>
                     <div class="item-input">
-                      <input type="text" placeholder=""/>
+                      <input type="text" placeholder="" id="contacto_nombre" />
                     </div>
                   </div>
                 </div>
@@ -117,7 +118,7 @@
                   <div class="item-inner">
                     <div class="item-title label">E-mail</div>
                     <div class="item-input">
-                      <input type="email" placeholder=""/>
+                      <input type="email" placeholder="" id="contacto_email" />
                     </div>
                   </div>
                 </div>
@@ -127,7 +128,7 @@
                   <div class="item-inner">
                     <div class="item-title label">Tema</div>
                     <div class="item-input">
-                      <input type="tel" placeholder="Conferencias motivacionales"/>
+                      <input type="tel" placeholder="Conferencias motivacionales"  id="contacto_tema" />
                     </div>
                   </div>
                 </div>
@@ -137,7 +138,7 @@
                   <div class="item-inner">
                     <div class="item-title label">Teléfono</div>
                     <div class="item-input">
-                      <input type="tel" placeholder=""/>
+                      <input type="tel" placeholder=""  id="contacto_telefono" />
                     </div>
                   </div>
                 </div>
@@ -149,14 +150,14 @@
                   <div class="item-inner">
                     <div class="item-title label">Mensaje</div>
                     <div class="item-input">
-                      <textarea class="resizable"></textarea>
+                      <textarea class="resizable"  id="contacto_mensaje" ></textarea>
                     </div>
                   </div>
                 </div>
               </li>
             </ul>
           </div>
-          <div class="content-block"> <a href="home.html" class="button button-fill ">Enviar</a> </div>
+          <div class="content-block"> <a href="#" class="button button-fill " id="btn_enviar_mensaje">Enviar</a> </div>
           <hr>
         </div>
         <div class="buttonbar row no-gutter">
@@ -201,6 +202,7 @@
 <script type="text/javascript" src="js/maxframes.js"></script>
 <script type="text/javascript" src="js/raphael-2.1.4.min.js"></script>
 <script type="text/javascript" src="js/justgage.js"></script>
+<script type="text/javascript" src="js/timedropper.min.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
